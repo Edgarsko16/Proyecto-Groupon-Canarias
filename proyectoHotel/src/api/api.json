@@ -1,0 +1,45 @@
+{"productos": [
+    {
+      "id": 1,
+      "nombre": "Habitación Individual",
+      "descripcion": "Una habitación cómoda para una persona.",
+      "precio": 50,
+      "imagen": "habitacionIndividual.jpeg"
+    },
+    {
+      "id": 2,
+      "nombre": "Habitación Doble",
+      "descripcion": "Perfecta para dos personas, con todas las comodidades.",
+      "precio": 80,
+      "imagen": "habitacionDoble.jpg"
+    },
+    {
+      "id": 3,
+      "nombre": "Suite",
+      "descripcion": "Una suite lujosa con sala de estar y vistas panorámicas.",
+      "precio": 150,
+      "imagen": "suite.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "Habitación Deluxe",
+        "descripcion": "Habitación espaciosa con vistas al mar y jacuzzi privado.",
+        "precio": 120,
+        "imagen": "habitacionDeluxe.jpg"
+    },
+    {
+        "id": 5,
+        "nombre": "Villa Familiar",
+        "descripcion": "Ideal para familias, con cocina equipada y jardín privado.",
+        "precio": 40,
+        "imagen": "villaFamiliar.jpg"
+    },
+    {
+        "id": 6,
+        "nombre": "Bungalow con piscina",
+        "descripcion": "Bungalow cómodo con piscina privada y área de descanso.",
+        "precio": 30,
+        "imagen": "bungalowPiscina.jpg"
+    }
+  ]
+}
