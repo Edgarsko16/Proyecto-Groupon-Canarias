@@ -30,8 +30,8 @@ function App() {
       <Header openCart={abrirCarrito} cantidad={carrito.length} />
 
       <div className="flex-1 max-w-6xl mx-auto w-full p-6">
-        <h1 className="text-3xl mb-6 text-blue-400 text-center">
-          <span className="font-bold">Hola,</span> date un capricho hoy con una gran oferta!
+        <h1 className="text-3xl font-bold mb-6 text-blue-400 text-center">
+          Hola desde React + Tailwind
         </h1>
 
         {/* GRID */}
