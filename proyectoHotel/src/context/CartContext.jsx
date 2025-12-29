@@ -1,9 +1,20 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext();
 export function CartProvider({ children }) {
   const [carrito, setCarrito] = useState([]);
 
+  useEffect(() => {
+    const carritoGuardado = localStorage.getItem("carrito");
+    if (carritoGuardado) {
+      setCarrito(JSON.parse(carritoGuardado));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }, [carrito]);
+  
   const añadirCarrito = (producto) => {
     const existe = carrito.find((item) => item.id === producto.id);
 
@@ -20,10 +31,8 @@ export function CartProvider({ children }) {
     }
   };
 
-  const eliminarProducto = (index) => {
-    const nuevoCarrito = [...carrito];
-    nuevoCarrito.splice(index, 1);
-    setCarrito(nuevoCarrito);
+  const eliminarProducto = (id) => {
+    setCarrito(carrito.filter((item) => item.id !== id));
   };
 
   const aumentarCantidad = (id) => {

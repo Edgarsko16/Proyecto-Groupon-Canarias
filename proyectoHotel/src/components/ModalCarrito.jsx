@@ -1,14 +1,18 @@
+import { useMemo } from "react";
+
 function ModalCarrito({
   carrito,
   onClose,
   eliminarProducto,
   aumentarCantidad,
   disminuirCantidad,
-  vaciarCarrito
+  vaciarCarrito,
 }) {
-  const total = carrito
+  const total = useMemo(() => {
+  return carrito
     .reduce((acc, producto) => acc + producto.precio * producto.cantidad, 0)
     .toFixed(2);
+}, [carrito]);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -53,7 +57,7 @@ function ModalCarrito({
 
                   {/* eliminar */}
                   <button
-                    onClick={() => eliminarProducto(index)}
+                    onClick={() => eliminarProducto(producto.id)}
                     className="text-red-600 hover:text-red-800 font-bold"
                   >
                     ✖
