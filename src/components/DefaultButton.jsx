@@ -1,7 +1,7 @@
-function DefaultButton({ texto, onClick }) {
+function DefaultButton({ texto, onClick, className="" }) {
   return (
     <button
-      className="px-4 py-2 ml-2 rounded-lg bg-teal-800 text-white font-semibold hover:bg-teal-600 transition"
+      className={`rounded-lg px-3 py-2 font-semibold transition ${className}`}
       onClick={onClick}
     >
       {texto}

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import DefaultButton from "./DefaultButton.jsx";
 
 function ModalCarrito({
   carrito,
@@ -9,84 +10,82 @@ function ModalCarrito({
   vaciarCarrito,
 }) {
   const total = useMemo(() => {
-  return carrito
-    .reduce((acc, producto) => acc + producto.precio * producto.cantidad, 0)
-    .toFixed(2);
-}, [carrito]);
+    return carrito.reduce(
+      (acc, producto) => acc + producto.precio * producto.cantidad,
+      0
+    );
+  }, [carrito]);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white max-w-md w-full p-6 rounded-xl shadow-xl relative">
-        <h2 className="text-2xl font-bold mb-4 text-slate-800">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+      <div className="bg-white w-full max-w-md rounded-xl p-6 shadow-xl">
+        {/* TÍTULO */}
+        <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
           🛒 Tu carrito
         </h2>
 
-        {carrito.length > 0 ? (
-          <>
-            {carrito.map((producto, index) => (
+        {/* LISTA */}
+        {carrito.length === 0 ? (
+          <p className="text-slate-500">Tu carrito está vacío</p>
+        ) : (
+          <div className="space-y-3">
+            {carrito.map((producto) => (
               <div
-                key={index}
-                className="border-b py-2 flex justify-between items-center text-slate-700"
+                key={producto.id}
+                className="flex justify-between items-center border-b pb-2"
               >
-                <span>
-                  {producto.nombre} —
-                  <span className="text-teal-600 font-semibold">
-                    {" "}
-                    {producto.precio}€
-                  </span>
-                </span>
+                <div>
+                  <p className="font-medium text-slate-800">
+                    {producto.nombre}
+                  </p>
+                  <p className="text-sm text-teal-600">{producto.precio} €</p>
+                </div>
 
                 <div className="flex items-center gap-2">
-                  {/* disminuir */}
-                  <button
+                  <DefaultButton
+                    texto="➖"
                     onClick={() => disminuirCantidad(producto.id)}
-                    className="bg-slate-300 px-2 py-1 rounded hover:bg-slate-400"
-                  >
-                    ➖
-                  </button>
+                    className="bg-slate-300 hover:bg-slate-400 text-black px-2"
+                  />
 
-                  <span>{producto.cantidad}</span>
+                  <span className="font-semibold">{producto.cantidad}</span>
 
-                  {/* aumentar */}
-                  <button
+                  <DefaultButton
+                    texto="➕"
                     onClick={() => aumentarCantidad(producto.id)}
-                    className="bg-slate-300 px-2 py-1 rounded hover:bg-slate-400"
-                  >
-                    ➕
-                  </button>
+                    className="bg-slate-300 hover:bg-slate-400 text-black px-2"
+                  />
 
-                  {/* eliminar */}
-                  <button
+                  <DefaultButton
+                    texto="✖"
                     onClick={() => eliminarProducto(producto.id)}
-                    className="text-red-600 hover:text-red-800 font-bold"
-                  >
-                    ✖
-                  </button>
+                    className="bg-red-300 hover:bg-red-600 text-white px-2"
+                  />
                 </div>
               </div>
             ))}
-          </>
-        ) : (
-          <p className="text-slate-600">Tu carrito está vacío</p>
+          </div>
         )}
 
-        {/* Total */}
-        <p className="mt-4 font-bold text-lg text-slate-800">Total: {total}€</p>
+        {/* TOTAL */}
+        <p className="mt-4 text-lg font-bold text-slate-800">
+          Total: {total.toFixed(2)} €
+        </p>
 
-        {/* Botón cerrar */}
-        <button
-          onClick={onClose}
-          className="mt-6 w-full py-2 bg-teal-700 text-white rounded-lg hover:bg-teal-600 transition font-semibold"
-        >
-          Cerrar
-        </button>
+        {/* BOTONES */}
+        <div className="mt-6 flex flex-col gap-3">
+          <DefaultButton
+            texto="Cerrar"
+            onClick={onClose}
+            className="bg-teal-700 hover:bg-teal-600 text-white w-full"
+          />
 
-        <button
-          onClick={vaciarCarrito}
-          className="mt-4 w-full py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold"
-        >
-          Vaciar carrito
-        </button>
+          <DefaultButton
+            texto="Vaciar carrito"
+            onClick={vaciarCarrito}
+            className="bg-red-600 hover:bg-red-700 text-white w-full"
+          />
+        </div>
       </div>
     </div>
   );
